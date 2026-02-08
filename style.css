@@ -10,8 +10,10 @@
 
 body {
     background-color: #ffffff; 
+    /* استخدام dvh لضمان التوافق مع متصفحات الجوال (شريط العنوان) */
     height: 100vh;
-    min-height: 100vh; 
+    height: 100dvh; 
+    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -61,9 +63,9 @@ body {
 .main-card {
     background: transparent; 
     
-    /* للكمبيوتر واللابتوب */
+    /* أبعاد الكمبيوتر الافتراضية */
     width: 550px; 
-    height: 550px; /* جعل الارتفاع مساوٍ للعرض */
+    height: 550px; 
     
     display: flex;
     flex-direction: column;
@@ -126,36 +128,40 @@ body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
 
 @media (max-width: 768px) {
     /* تعديل شعار الجامعة في الجوال */
-    .university-logo { width: 150px; top: 20px; right: 20px; }
+    .university-logo { width: 140px; top: 20px; right: 20px; }
     
-    /* تعديل البطاقة الرئيسية */
+    /* === تعديل البطاقة الرئيسية لتكون دائرة مثالية في المنتصف === */
     .main-card { 
         /* العرض نسبة من الشاشة */
-        width: 90vw; 
-        max-width: 380px; /* أقصى عرض حتى لا تكبر جداً */
+        width: 85vw; 
+        max-width: 360px; /* أقصى عرض */
         
-        /* هذا هو السطر السحري لجعلها دائرة دائماً */
+        /* هذا السطر يجبرها تكون دائرة */
         aspect-ratio: 1 / 1; 
         
-        height: auto; /* الارتفاع يتحدد تلقائياً ليساوي العرض */
-        min-height: unset; /* إلغاء الحد الأدنى للارتفاع */
+        /* إعادة تعيين الارتفاع ليكون أوتوماتيكياً بناءً على العرض */
+        height: auto;
+        min-height: unset; 
         
-        padding: 20px; /* تقليل الحشوة */
+        padding: 20px;
+        
+        /* رفع الدائرة قليلاً للأعلى لتعويض مكان الزر في الأسفل (توسط بصري) */
+        transform: translateY(-5%);
     }
     
-    /* تصغير الدوائر الخلفية قليلاً */
+    /* تصغير الدوائر الخلفية قليلاً لتناسب الحجم الجديد */
     .main-card::before { top: -10px; left: -10px; right: -10px; bottom: -10px; }
     
-    /* زر التالي: نضعه في الأسفل في المنتصف بدلاً من الجانب */
+    /* زر التالي: نضعه في الأسفل في المنتصف */
     .next-btn {
         right: 50%; 
         top: auto;
-        bottom: -35px; 
-        margin-right: -37.5px; 
-        transform: translateY(0);
+        bottom: -35px; /* يخرج نصفه من الأسفل */
+        margin-right: -37.5px; /* نصف عرض الزر ليكون في المنتصف تماماً */
+        transform: translateY(0); /* إلغاء التحويل السابق */
     }
     .next-btn:hover { transform: scale(1.1); }
     
-    /* إخفاء بعض الأشكال لتقليل الازدحام */
+    /* إخفاء بعض الأشكال لتقليل الازدحام في الجوال */
     .shape-2, .shape-6, .shape-7 { opacity: 0.3; transform: scale(0.6); }
 }
