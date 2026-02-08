@@ -21,7 +21,7 @@
             min-height: 100vh;
         }
 
-        /* الخلفية (لم يتم التعديل عليها حسب طلبك) */
+        /* الخلفية */
         body::before {
             content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -10;
             background-image: url('Screenshot 2026-02-08 052539.png');
@@ -47,25 +47,20 @@
             to { opacity: 1; transform: scale(1); }
         }
 
-        /* === الحاوية الزجاجية (تم تعديل الأبعاد لتناسب التابلت) === */
+        /* === الحاوية الزجاجية === */
         .content-card {
             width: 100%; 
-            max-width: 1200px; /* حد أقصى للشاشات الكبيرة */
-            
-            /* أبعاد مرنة */
+            max-width: 1200px; 
             background: rgba(255, 255, 255, 0.1); 
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            
             border-radius: 30px;
             padding: 50px;
-            
             display: flex; 
             flex-direction: row; 
             align-items: center; 
             justify-content: center; 
             gap: 40px;
-            
             position: relative;
             z-index: 5;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
@@ -79,7 +74,7 @@
             -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none;
         }
 
-        /* --- 1. قسم المجلة (يمين) --- */
+        /* --- 1. قسم المجلة --- */
         .magazine-section {
             flex: 0 0 400px; 
             height: 550px;
@@ -96,13 +91,9 @@
         }
         .magazine-image:hover { transform: scale(1.03); }
 
-        /* --- 2. قسم اللوحة الرخامية (يسار) --- */
+        /* --- 2. قسم اللوحة الرخامية --- */
         .plaque-section {
-            flex: 1;
-            max-width: 650px;
-            order: 2; 
-            display: flex; justify-content: center;
-            width: 100%;
+            flex: 1; max-width: 650px; order: 2; display: flex; justify-content: center; width: 100%;
         }
 
         /* === الرخام المطفي === */
@@ -140,86 +131,96 @@
         .plaque-name { font-family: 'Aref Ruqaa', serif; font-size: 1.8rem; margin-top: 8px; color: #fff; display: block; }
         .plaque-footer { font-family: 'Tajawal', sans-serif; margin-top: 25px; font-size: 0.9rem; color: #94a3b8; letter-spacing: 0.5px; border-top: 1px solid rgba(148, 163, 184, 0.2); padding-top: 10px; display: inline-block; }
 
-        .header-logo { position: absolute; top: 50px; right: 50px; z-index: 1000; }
-        .header-logo img { height: 140px; width: auto; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5)); }
+        /* === تحسينات الشعار للتجاوب (Adaptive Logo) === */
+        .header-logo { 
+            position: absolute; 
+            top: 30px; 
+            right: 30px; 
+            z-index: 1000; 
+            transition: all 0.3s ease; /* حركة ناعمة عند تغيير الحجم */
+        }
+        
+        .header-logo img { 
+            height: 140px; 
+            width: auto; 
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            transition: all 0.3s ease;
+        }
 
         /* ========================================================== */
-        /* ============= تحسينات التجاوب (الأيباد والتابلت) ============= */
+        /* ============= ميديا كويري (تجاوب الشاشات) ============= */
         /* ========================================================== */
         
-        /* 1. للأيباد برو واللابتوبات الصغيرة والتابلت في الوضع العرضي (Landscape) */
-        @media (max-width: 1200px) {
-            .content-card { 
-                width: 95%; 
-                padding: 40px; 
-                gap: 30px; 
+        /* 1. للأيباد واللابتوبات الصغيرة (بين 900px و 1300px) */
+        @media (max-width: 1300px) {
+            /* تحريك الشعار للأعلى واليمين وتصغيره لمنع التداخل */
+            .header-logo { 
+                top: 15px; 
+                right: 15px; 
             }
-            
-            .magazine-section { 
-                flex: 0 0 45%; /* تأخذ 45% من العرض */
-                height: 450px; /* تقليل الارتفاع قليلاً */
+            .header-logo img { 
+                height: 100px; /* تصغير الشعار */
             }
-            
-            .plaque-section {
-                flex: 1;
-            }
-            
-            /* تصغير الخطوط قليلاً لتناسب المساحة */
+
+            .content-card { width: 95%; padding: 40px; gap: 30px; }
+            .magazine-section { flex: 0 0 45%; height: 450px; }
             .plaque-basmala { font-size: 1.6rem; }
             .plaque-body { font-size: 1.3rem; }
             .plaque-name { font-size: 1.6rem; }
         }
 
-        /* 2. للأيباد العادي والتابلت في الوضع الطولي (Portrait) */
+        /* 2. للأيباد بورتريت والتابلت (أقل من 950px) */
         @media (max-width: 950px) {
             body { 
-                align-items: flex-start; /* السماح بالسكرول */
+                align-items: flex-start; 
                 overflow-y: auto; 
-                padding-top: 100px; /* مسافة للشعار */
+                padding-top: 100px; /* ترك مسافة للشعار في الأعلى */
                 padding-bottom: 50px;
             }
 
+            /* تصغير الشعار أكثر في التابلت */
+            .header-logo { 
+                top: 10px; 
+                right: 10px; 
+            }
+            .header-logo img { 
+                height: 80px; 
+            }
+
             .content-card { 
-                flex-direction: column; /* ترتيب عمودي */
+                flex-direction: column; 
                 width: 90%; 
                 padding: 40px 30px;
                 gap: 40px;
             }
 
-            /* ترتيب العناصر: المجلة فوق، اللوحة تحت */
             .magazine-section { 
                 order: 1; 
                 width: 100%;
                 height: auto;
-                max-height: 400px; /* تحديد أقصى ارتفاع */
+                max-height: 400px; 
                 flex: none; 
             }
             
             .magazine-image {
                 width: auto;
-                max-width: 80%; /* حتى لا تكون ضخمة جداً */
+                max-width: 80%;
                 max-height: 400px;
             }
 
-            .plaque-section { 
-                order: 2; 
-                width: 100%; 
-                max-width: 100%;
-            }
-
-            .tech-marble-plaque {
-                min-height: auto;
-                padding: 30px 20px;
-            }
-
-            .header-logo { width: 120px; top: 20px; right: 20px; }
-            .header-logo img { height: 90px; }
+            .plaque-section { order: 2; width: 100%; max-width: 100%; }
+            .tech-marble-plaque { min-height: auto; padding: 30px 20px; }
         }
 
         /* 3. للجوالات الصغيرة */
         @media (max-width: 600px) {
             .content-card { padding: 25px; width: 95%; }
             .magazine-image { max-width: 100%; }
+            
+            /* الشعار في الجوال */
+            .header-logo { top: 10px; right: 10px; }
+            .header-logo img { height: 70px; }
+            
             .plaque-basmala { font-size: 1.4rem; }
             .plaque-body { font-size: 1.1rem; }
             .plaque-name { font-size: 1.3rem; }
