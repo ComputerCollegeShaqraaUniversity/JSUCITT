@@ -1,0 +1,150 @@
+/* إعدادات عامة */
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Tajawal', sans-serif;
+}
+
+body {
+    background-color: #ffffff; 
+    height: 100vh;
+    /* في الجوال قد نحتاج للنزول قليلاً، لذا min-height أفضل */
+    min-height: 100vh; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* تأثير دخول الصفحة (Fade In) */
+@keyframes pageIn {
+    from { opacity: 0; filter: blur(10px); transform: scale(0.95); }
+    to { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+body {
+    animation: pageIn 0.8s ease-out forwards;
+}
+
+/* --- تعريف حركات الطفو (Animations) --- */
+@keyframes float { 0%, 100% { transform: translateY(0px); } 50% { transform: translateY(-20px); } }
+@keyframes float-45 { 0%, 100% { transform: rotate(45deg) translateY(0px); } 50% { transform: rotate(45deg) translateY(-20px); } }
+@keyframes float-minus25 { 0%, 100% { transform: rotate(-25deg) translateY(0px); } 50% { transform: rotate(-25deg) translateY(-20px); } }
+@keyframes float-30 { 0%, 100% { transform: rotate(30deg) translateY(0px); } 50% { transform: rotate(30deg) translateY(-20px); } }
+
+/* --- شعار الجامعة (الزاوية اليمنى) --- */
+.university-logo {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 240px;
+    height: auto;
+    z-index: 100;
+    mix-blend-mode: multiply; 
+}
+
+/* --- الأشكال الخلفية الديكورية --- */
+.shape { position: absolute; z-index: 1; }
+.shape-1 { top: 12%; left: 8%; width: 50px; height: 50px; background: linear-gradient(135deg, #7F00FF, #00D2FF); transform: rotate(45deg); border-radius: 8px; opacity: 0.9; animation: float-45 5s ease-in-out infinite; }
+.shape-2 { top: 40%; left: -40px; width: 200px; height: 200px; background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); border-radius: 50%; opacity: 0.5; animation: float 6.5s ease-in-out infinite; }
+.shape-3-fix { bottom: 8%; left: 8%; width: 80px; height: 80px; background: linear-gradient(135deg, #667eea, #764ba2); clip-path: polygon(50% 0%, 0% 100%, 100% 100%); animation: float-minus25 4s ease-in-out infinite; }
+.shape-4 { top: 25%; right: 10%; width: 40px; height: 40px; background: linear-gradient(to bottom, #667eea, #764ba2); border-radius: 50%; animation: float 3s ease-in-out infinite; }
+.shape-5 { bottom: 10%; right: 10%; width: 60px; height: 60px; background: linear-gradient(135deg, #667eea, #764ba2); transform: rotate(30deg); border-radius: 10px; animation: float-30 5.5s ease-in-out infinite; }
+.shape-6 { top: 40%; left: 90%; width: 110px; height: 110px; background: linear-gradient(to bottom, #667eea, #63b5fc); border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
+.shape-7 { top: 40%; left: 90%; width: 110px; height: 110px; background: linear-gradient(to bottom, #152c69, #63b5fc); opacity: 0.2; border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
+.shape-8 { top: 62%; left: 2%; width: 140px; height: 140px; background: linear-gradient(to bottom, #667eea, #3b1080); opacity: 0.2; border-radius: 50%; animation: float 7.5s ease-in-out infinite; }
+
+/* --- الحاوية الرئيسية للصفحة الأولى --- */
+.main-card {
+    background: transparent; 
+    /* تحويل العرض والارتفاع إلى قيم مرنة */
+    width: 90%; 
+    max-width: 550px;
+    min-height: 550px; /* الارتفاع يتمدد حسب الحاجة */
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 20px; /* تقليل الحشوة للجوال */
+    position: relative;
+    z-index: 10;
+}
+
+.main-card::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #ffffff; border-radius: 50%; z-index: -1; 
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+}
+
+.main-card::before {
+    content: ''; position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
+    background-color: #f3f3f3; border-radius: 50%; z-index: -2; 
+    box-shadow: 0 40px 80px rgba(0, 0, 0, 0.35);
+}
+
+/* --- نصوص الصفحة الأولى --- */
+.top-title { 
+    font-size: clamp(1.8rem, 5vw, 2.2rem); /* خط مرن يتغير حسب الشاشة */
+    font-weight: 800; margin-bottom: -4px; 
+    background: linear-gradient(90deg, #4facfe 0%, #7F00FF 100%); 
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
+    background-clip: text; position: relative; z-index: 5; 
+}
+
+.logo-container { width: 85%; max-width: 350px; margin-bottom: 0px; display: flex; justify-content: center; padding: 0px; position: relative; z-index: 5; }
+.logo-container img { width: 100%; height: auto; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.1); }
+
+.bottom-text { 
+    font-size: clamp(1rem, 4vw, 1.3rem); /* خط مرن */
+    font-weight: 700; line-height: 1.5; color: #5a6fa8; position: relative; z-index: 5; 
+}
+.bottom-text span { display: block; background: linear-gradient(90deg, #4facfe 0%, #6157ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+/* --- زر السهم --- */
+.next-btn { 
+    position: absolute; 
+    right: -1.5cm; margin-right: -35px; top: 50%; transform: translateY(-50%); 
+    width: 75px; height: 75px; 
+    background-color: white; border-radius: 50%; border: none; box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); 
+    cursor: pointer; display: flex; justify-content: center; align-items: center; 
+    transition: transform 0.3s ease; z-index: 20; 
+}
+.next-btn:hover { transform: translateY(-50%) scale(1.1); }
+.arrow-icon { width: 16px; height: 16px; border-top: 5px solid #00d2ff; border-right: 5px solid #00d2ff; transform: rotate(45deg); margin-right: 6px; }
+
+/* --- تأثير الانتقال --- */
+body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
+
+/* ========================================================== */
+/* ============= ميديا كويري (تجاوب الجوال) ============= */
+/* ========================================================== */
+
+@media (max-width: 768px) {
+    /* تعديل شعار الجامعة في الجوال */
+    .university-logo { width: 150px; top: 20px; right: 20px; }
+    
+    /* تعديل البطاقة الرئيسية */
+    .main-card { width: 85%; min-height: 450px; padding: 40px 10px; }
+    
+    /* تصغير الدوائر الخلفية قليلاً */
+    .main-card::before { top: -10px; left: -10px; right: -10px; bottom: -10px; }
+    
+    /* زر التالي: نضعه في الأسفل في المنتصف بدلاً من الجانب */
+    .next-btn {
+        right: 50%; 
+        top: auto;
+        bottom: -35px; /* يخرج نصفه من الأسفل */
+        margin-right: -37.5px; /* نصف عرض الزر ليكون في المنتصف تماماً */
+        transform: translateY(0);
+    }
+    .next-btn:hover { transform: scale(1.1); }
+    
+    /* إخفاء بعض الأشكال لتقليل الازدحام */
+    .shape-2, .shape-6, .shape-7 { opacity: 0.3; transform: scale(0.6); }
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تدشين المجلة العلمية - JSUCIT</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* إضافة تأثير الانتقال (Fade Effect) هنا لضمان عمله */
+        body {
+            opacity: 1;
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out; /* حركة ناعمة جداً */
+        }
+        
+        /* كلاس الاختفاء الذي سيضيفه الجافاسكريبت */
+        body.fade-out {
+            opacity: 0;
+            transform: scale(1.1); /* تكبير بسيط عند الخروج */
+            pointer-events: none;  /* منع أي نقرات أخرى أثناء الاختفاء */
+        }
+    </style>
+</head>
+<body>
+
+    <img src="WhatsApp Image 2026-02-08 at 2.27.53 AM.jpeg" alt="Shaqra University" class="university-logo">
+
+    <div class="shape shape-1"></div>
+    <div class="shape shape-2"></div>
+    <div class="shape shape-3-fix"></div>
+    <div class="shape shape-4"></div>
+    <div class="shape shape-5"></div>
+    <div class="shape shape-6"></div>
+
+    <div class="main-card">
+        <h1 class="top-title">تدشين المجلة العلمية</h1>
+
+        <div class="logo-container">
+            <img src="WhatsApp Image 2026-02-08 at 2.27.52 AM (1).jpeg" alt="JSUCIT Logo">
+        </div>
+
+        <div class="bottom-text">
+            <span>مجلة جامعة شقراء</span>
+            <span>للحوسبة وتقنية المعلومات</span>
+        </div>
+        
+        <a href="second.html" class="next-btn" id="transitionLink">
+            <div class="arrow-icon"></div>
+        </a>
+        
+    </div>
+
+    <script>
+        document.getElementById('transitionLink').addEventListener('click', function(event) {
+            // 1. إيقاف الانتقال الفوري المعتاد
+            event.preventDefault();
+            
+            // 2. الحصول على رابط الصفحة التالية
+            const targetUrl = this.href;
+
+            // 3. إضافة كلاس الاختفاء للجسم (body)
+            document.body.classList.add('fade-out');
+
+            // 4. الانتظار حتى تنتهي الحركة (0.8 ثانية) ثم الانتقال
+            setTimeout(function() {
+                window.location.href = targetUrl;
+            }, 800); 
+        });
+    </script>
+</body>
+</html>
