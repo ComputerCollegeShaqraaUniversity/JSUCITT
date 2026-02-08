@@ -11,7 +11,6 @@
 body {
     background-color: #ffffff; 
     height: 100vh;
-    /* في الجوال قد نحتاج للنزول قليلاً، لذا min-height أفضل */
     min-height: 100vh; 
     display: flex;
     justify-content: center;
@@ -61,17 +60,17 @@ body {
 /* --- الحاوية الرئيسية للصفحة الأولى --- */
 .main-card {
     background: transparent; 
-    /* تحويل العرض والارتفاع إلى قيم مرنة */
-    width: 90%; 
-    max-width: 550px;
-    min-height: 550px; /* الارتفاع يتمدد حسب الحاجة */
+    
+    /* للكمبيوتر واللابتوب */
+    width: 550px; 
+    height: 550px; /* جعل الارتفاع مساوٍ للعرض */
     
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 60px 20px; /* تقليل الحشوة للجوال */
+    padding: 60px 20px;
     position: relative;
     z-index: 10;
 }
@@ -90,7 +89,7 @@ body {
 
 /* --- نصوص الصفحة الأولى --- */
 .top-title { 
-    font-size: clamp(1.8rem, 5vw, 2.2rem); /* خط مرن يتغير حسب الشاشة */
+    font-size: clamp(1.8rem, 5vw, 2.2rem); 
     font-weight: 800; margin-bottom: -4px; 
     background: linear-gradient(90deg, #4facfe 0%, #7F00FF 100%); 
     -webkit-background-clip: text; -webkit-text-fill-color: transparent; 
@@ -101,7 +100,7 @@ body {
 .logo-container img { width: 100%; height: auto; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.1); }
 
 .bottom-text { 
-    font-size: clamp(1rem, 4vw, 1.3rem); /* خط مرن */
+    font-size: clamp(1rem, 4vw, 1.3rem); 
     font-weight: 700; line-height: 1.5; color: #5a6fa8; position: relative; z-index: 5; 
 }
 .bottom-text span { display: block; background: linear-gradient(90deg, #4facfe 0%, #6157ff 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
@@ -130,7 +129,19 @@ body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
     .university-logo { width: 150px; top: 20px; right: 20px; }
     
     /* تعديل البطاقة الرئيسية */
-    .main-card { width: 85%; min-height: 450px; padding: 40px 10px; }
+    .main-card { 
+        /* العرض نسبة من الشاشة */
+        width: 90vw; 
+        max-width: 380px; /* أقصى عرض حتى لا تكبر جداً */
+        
+        /* هذا هو السطر السحري لجعلها دائرة دائماً */
+        aspect-ratio: 1 / 1; 
+        
+        height: auto; /* الارتفاع يتحدد تلقائياً ليساوي العرض */
+        min-height: unset; /* إلغاء الحد الأدنى للارتفاع */
+        
+        padding: 20px; /* تقليل الحشوة */
+    }
     
     /* تصغير الدوائر الخلفية قليلاً */
     .main-card::before { top: -10px; left: -10px; right: -10px; bottom: -10px; }
@@ -139,8 +150,8 @@ body.fade-out { opacity: 0; transform: scale(1.05); filter: blur(10px); }
     .next-btn {
         right: 50%; 
         top: auto;
-        bottom: -35px; /* يخرج نصفه من الأسفل */
-        margin-right: -37.5px; /* نصف عرض الزر ليكون في المنتصف تماماً */
+        bottom: -35px; 
+        margin-right: -37.5px; 
         transform: translateY(0);
     }
     .next-btn:hover { transform: scale(1.1); }
